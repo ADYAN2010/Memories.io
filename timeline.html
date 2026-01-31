@@ -27,8 +27,28 @@
     h1 {
       text-align: center;
       font-weight: 600;
-      margin-bottom: 40px;
+      margin-bottom: 12px;
       letter-spacing: 0.5px;
+    }
+
+    .top-actions {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logout {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #9ca3af;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .logout:hover {
+      color: white;
+      border-color: #38bdf8;
     }
 
     .timeline {
@@ -92,7 +112,18 @@
 </head>
 <body>
 
+  <!-- 🔒 PROTECTION -->
+  <script>
+    if (localStorage.getItem("vault_access") !== "true") {
+      window.location.href = "index.html";
+    }
+  </script>
+
   <h1>Memory Vault</h1>
+
+  <div class="top-actions">
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
 
   <div class="timeline">
 
@@ -128,6 +159,13 @@
     </div>
 
   </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("vault_access");
+      window.location.href = "index.html";
+    }
+  </script>
 
 </body>
 </html>

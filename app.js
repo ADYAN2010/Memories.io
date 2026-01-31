@@ -1,19 +1,29 @@
-const { data } = await supabase.auth.getUser();
-if (!data.user) window.location.href = "index.html";
-
+// Supabase CDN must be loaded in HTML before this file
 
 const SUPABASE_URL = "https://bpcpihkspivsxyifpbsi.supabase.co";
 const SUPABASE_KEY = "sb_secret_YkGQJ7vC9xHWqr-91Q99BA_GSLB7Gkq";
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
+// 🔐 check auth on protected pages
+async function checkAuth() {
+  const { data } = await supabaseClient.auth.getUser();
+  if (!data.user) {
+    window.location.href = "index.html";
+  }
+}
+
+// 🔑 login
 async function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabaseClient.auth.signInWithPassword({
     email,
-    password,
+    password
   });
 
   if (error) {
@@ -23,44 +33,52 @@ async function login() {
   }
 }
 
+// 💾 save memory
+async function saveMemory(e) {
+  e.preventDefault();
 
-
-async function saveMemory() {
   const date = document.getElementById("date").value;
   const time = document.getElementById("time").value;
+  const year = document.getElementById("year").value;
   const conversation = document.getElementById("conversation").value;
-  const image = document.getElementById("image").files[0];
+  const image_url = document.getElementById("image").value;
 
-  let image_url = null;
+  const { error } = await supabaseClient
+    .from("entries")
+    .insert([
+      {
+        date,
+        time,
+        year,
+        conversation,
+        image_url
+      }
+    ]);
 
-  if (image) {
-    const fileName = Date.now() + "_" + image.name;
-    await supabase.storage.from("images").upload(fileName, image);
-    image_url = fileName;
+  if (error) {
+    alert(error.message);
+  } else {
+    alert("Memory saved 💙");
   }
-
-  await supabase.from("entries").insert([
-    { date, time, conversation, image_url }
-  ]);
-
-  alert("Memory saved 💙");
 }
 
-
-
+// 🕒 load timeline
 async function loadTimeline() {
-  const { data } = await supabase
+  const { data, error } = await supabaseClient
     .from("entries")
     .select("*")
     .order("date", { ascending: false });
 
-  const div = document.getElementById("timeline");
+  if (error) return;
 
-  data.forEach(e => {
-    div.innerHTML += `
+  const timeline = document.getElementById("timeline");
+  timeline.innerHTML = "";
+
+  data.forEach(item => {
+    timeline.innerHTML += `
       <div>
-        <h4>${e.date} ${e.time}</h4>
-        <p>${e.conversation}</p>
+        <h4>${item.date} ${item.time}</h4>
+        <p>${item.conversation}</p>
       </div>
     `;
   });

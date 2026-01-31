@@ -39,9 +39,31 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 10px;
       font-weight: 600;
       letter-spacing: 0.4px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .nav button {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #9ca3af;
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .nav button:hover {
+      color: white;
+      border-color: #38bdf8;
     }
 
     label {
@@ -79,7 +101,7 @@
       gap: 12px;
     }
 
-    button {
+    button.save {
       width: 100%;
       padding: 14px;
       border: none;
@@ -92,7 +114,7 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    button:hover {
+    button.save:hover {
       transform: translateY(-1px);
       box-shadow: 0 10px 24px rgba(56,189,248,0.4);
     }
@@ -107,12 +129,24 @@
 </head>
 <body>
 
+  <!-- 🔒 PROTECTION -->
+  <script>
+    if (localStorage.getItem("vault_access") !== "true") {
+      window.location.href = "index.html";
+    }
+  </script>
+
   <div class="container">
     <h1>Add Memory</h1>
 
-    <form>
+    <div class="nav">
+      <button onclick="goTimeline()">Timeline</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <form onsubmit="saveMemory(event)">
       <label>Date</label>
-      <input type="date">
+      <input type="date" required>
 
       <div class="row">
         <div style="flex:1">
@@ -126,18 +160,34 @@
       </div>
 
       <label>Conversation / Memory</label>
-      <textarea placeholder="What happened that day..."></textarea>
+      <textarea placeholder="What happened that day..." required></textarea>
 
       <label>Image URL (optional)</label>
       <input type="text" placeholder="https://">
 
-      <button type="submit">Save Memory</button>
+      <button class="save" type="submit">Save Memory</button>
     </form>
 
     <div class="hint">
-      This page is offline only · no data is saved yet
+      Offline mode · data not stored yet
     </div>
   </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("vault_access");
+      window.location.href = "index.html";
+    }
+
+    function goTimeline() {
+      window.location.href = "timeline.html";
+    }
+
+    function saveMemory(e) {
+      e.preventDefault();
+      alert("Saved locally (future Supabase ready)");
+    }
+  </script>
 
 </body>
 </html>
