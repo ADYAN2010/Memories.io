@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+
+  <title>Add Memory</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #020617, #0f172a);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+
+    label {
+      font-size: 13px;
+      color: #94a3b8;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: none;
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: #e5e7eb;
+      margin-bottom: 16px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    textarea {
+      resize: none;
+      height: 120px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #64748b;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+      color: #020617;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(56,189,248,0.4);
+    }
+
+    .hint {
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Add Memory</h1>
+
+    <form>
+      <label>Date</label>
+      <input type="date">
+
+      <div class="row">
+        <div style="flex:1">
+          <label>Time</label>
+          <input type="time">
+        </div>
+        <div style="flex:1">
+          <label>Year</label>
+          <input type="number" placeholder="2026">
+        </div>
+      </div>
+
+      <label>Conversation / Memory</label>
+      <textarea placeholder="What happened that day..."></textarea>
+
+      <label>Image URL (optional)</label>
+      <input type="text" placeholder="https://">
+
+      <button type="submit">Save Memory</button>
+    </form>
+
+    <div class="hint">
+      This page is offline only · no data is saved yet
+    </div>
+  </div>
+
+</body>
+</html>
