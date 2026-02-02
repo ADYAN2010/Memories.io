@@ -2,7 +2,7 @@
 const noBtn      = document.getElementById("noBtn");
 const yesBtn     = document.getElementById("yesBtn");
 const text       = document.getElementById("responseText");
-const overlay    = document.getElementById("ancientOverlay");
+const overlay    = document.getElementById("messageOverlay");
 const music      = document.getElementById("bgMusic");
 const transition = document.getElementById("pageTransition");
 const card       = document.querySelector(".card");
@@ -24,10 +24,10 @@ const noMessages = [
   "At this point you’re lying ❤️"
 ];
 
-/* ================= ANCIENT OVERLAY ================= */
+/* ================= MESSAGE INTRO OVERLAY ================= */
 
-// Auto-dismiss after 3.5s
-setTimeout(closeOverlay, 3500);
+// Auto-dismiss after 4s
+setTimeout(closeOverlay, 4000);
 
 // Dismiss on any tap/click
 overlay.addEventListener("click", closeOverlay, { once: true });
@@ -39,7 +39,7 @@ function closeOverlay() {
   overlay.style.opacity = "0";
   overlay.style.pointerEvents = "none";
 
-  // Start music on first real interaction (browser-safe)
+  // Start music safely after first interaction
   document.body.addEventListener(
     "click",
     () => {
@@ -58,27 +58,26 @@ noBtn.addEventListener("click", () => {
   text.textContent =
     noMessages[Math.min(noCount - 1, noMessages.length - 1)];
 
-  // Controlled scaling (capped)
+  // Controlled scaling
   const noScale  = Math.max(0.45, 1 - noCount * 0.15);
   const yesScale = Math.min(2.2, 1 + noCount * 0.18);
 
   noBtn.style.transform  = `scale(${noScale})`;
   yesBtn.style.transform = `scale(${yesScale})`;
 
-  // Hide NO after enough tries
   if (noCount >= 4) {
     noBtn.style.opacity = "0";
     noBtn.style.pointerEvents = "none";
   }
 });
 
-/* ================= YES BUTTON (SMOOTH TRANSITION) ================= */
+/* ================= YES BUTTON ================= */
 yesBtn.addEventListener("click", () => {
   card.classList.add("exit");
   transition.classList.add("active");
 
   setTimeout(() => {
-    window.location.href = "gallary.html";
+    window.location.href = "gallery.html";
   }, 650);
 });
 
