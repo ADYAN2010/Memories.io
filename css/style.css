@@ -1,0 +1,285 @@
+/* ================= ROOT TOKENS ================= */
+:root {
+  --pink: #ff4d6d;
+  --pink-soft: #ff9a9e;
+  --glass: rgba(255, 255, 255, 0.18);
+  --text-dark: #3b2f2f;
+}
+
+/* ================= RESET ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, var(--pink-soft), var(--pink));
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: white;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+/* ================= BACKGROUND LAYERS ================= */
+#romanceCanvas,
+.gradient-glow,
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Canvas */
+#romanceCanvas {
+  z-index: 0;
+}
+
+/* Glow */
+.gradient-glow {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,154,158,0.45), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255,77,109,0.45), transparent 50%);
+  animation: glowMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
+
+/* Floating Hearts */
+.floating-hearts {
+  z-index: 2;
+  overflow: hidden;
+}
+
+.floating-hearts span {
+  position: absolute;
+  bottom: -10%;
+  width: 18px;
+  height: 18px;
+  background: rgba(255,255,255,0.25);
+  transform: rotate(45deg);
+  animation: floatUp linear infinite;
+}
+
+.floating-hearts span::before,
+.floating-hearts span::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+}
+
+.floating-hearts span::before { top: -9px; }
+.floating-hearts span::after { left: -9px; top: 0; }
+
+@keyframes floatUp {
+  from { transform: translateY(0) rotate(45deg); opacity: 0; }
+  15% { opacity: 0.6; }
+  to { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+}
+
+/* ================= HEART ICON ================= */
+.heart {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  width: 44px;
+  height: 44px;
+  background: var(--pink);
+  transform: rotate(-45deg);
+  animation: pulse 1.4s ease-in-out infinite;
+  z-index: 5;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  background: var(--pink);
+  border-radius: 50%;
+}
+
+.heart::before { top: -22px; }
+.heart::after { left: 22px; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1) rotate(-45deg); }
+  50% { transform: scale(1.15) rotate(-45deg); }
+}
+
+/* ================= ANCIENT INTRO ================= */
+#ancientOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity 0.6s ease;
+}
+
+.ancient-paper {
+  background: url("../assets/parchment.jpg") center/cover no-repeat;
+  color: var(--text-dark);
+  width: min(90%, 420px);
+  padding: 36px 32px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+  animation: fadeInScale 1.2s ease forwards;
+}
+
+.tap-hint {
+  margin-top: 18px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* ================= SCENE ================= */
+.scene {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 5;
+}
+
+/* ================= CARD ================= */
+.card {
+  width: 100%;
+  max-width: 360px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  padding: 36px 28px;
+  border-radius: 26px;
+  text-align: center;
+  box-shadow: 0 40px 90px rgba(0,0,0,0.35);
+  animation: cardEnter 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.card.exit {
+  animation: cardExit 0.6s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+/* ================= BUTTONS ================= */
+.buttons {
+  margin-top: 28px;
+  display: flex;
+  gap: 14px;
+}
+
+button {
+  flex: 1;
+  border-radius: 999px;
+  padding: 14px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* ================= PAGE TRANSITION ================= */
+#pageTransition {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, var(--pink-soft), var(--pink));
+  opacity: 0;
+  pointer-events: none;
+  z-index: 200;
+  transition: opacity 0.6s ease;
+}
+
+#pageTransition.active {
+  opacity: 1;
+}
+
+/* ================= GALLERY ================= */
+.gallery-card {
+  max-width: 900px;
+}
+
+.gallery-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.photo-frame {
+  aspect-ratio: 3 / 4;
+  padding: 6px;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.6),
+    rgba(255,255,255,0.2)
+  );
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ================= FOOTER ================= */
+.creator {
+  position: fixed;
+  bottom: 14px;
+  right: 18px;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  z-index: 5;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardExit {
+  to { opacity: 0; transform: translateY(40px) scale(0.96); }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .buttons {
+    flex-direction: column;
+  }
+
+  .floating-hearts span {
+    width: 14px;
+    height: 14px;
+  }
+}
