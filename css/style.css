@@ -3,7 +3,7 @@
   --pink: #ff4d6d;
   --pink-soft: #ff9a9e;
   --glass: rgba(255, 255, 255, 0.18);
-  --glass-strong: rgba(255, 255, 255, 0.25);
+  --glass-strong: rgba(255, 255, 255, 0.26);
 }
 
 /* ================= RESET ================= */
@@ -37,12 +37,12 @@ body {
   pointer-events: none;
 }
 
-/* Canvas */
+/* Canvas (deepest) */
 #romanceCanvas {
   z-index: 0;
 }
 
-/* Glow */
+/* Animated glow */
 .gradient-glow {
   z-index: 1;
   background:
@@ -91,7 +91,7 @@ body {
   to   { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
 }
 
-/* ================= MESSAGE INTRO OVERLAY ================= */
+/* ================= MESSAGE INTRO (REPLACES ANCIENT) ================= */
 #messageOverlay {
   position: fixed;
   inset: 0;
@@ -246,11 +246,42 @@ button {
   opacity: 1;
 }
 
+/* ================= GALLERY ================= */
+.gallery-card {
+  max-width: 900px;
+}
+
+.gallery-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.photo-frame {
+  aspect-ratio: 3 / 4;
+  padding: 6px;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.6),
+    rgba(255,255,255,0.2)
+  );
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
 /* ================= FOOTER ================= */
 .creator {
   position: fixed;
-  right: 18px;
   bottom: 14px;
+  right: 18px;
   font-size: 0.75rem;
   opacity: 0.7;
   z-index: 5;
@@ -271,12 +302,14 @@ button {
   to { opacity: 0; transform: translateY(40px) scale(0.96); }
 }
 
-/* ================= MOBILE ================= */
-@media (max-width: 480px) {
-  .card h1 {
-    font-size: 1.8rem;
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
+@media (max-width: 480px) {
   .buttons {
     flex-direction: column;
   }
