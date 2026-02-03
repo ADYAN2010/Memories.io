@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Let’s Plan Something</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/plan.css" />
+</head>
+
+<body>
+
+  <main class="planner">
+
+    <h1>Plan a Date With Me 💖</h1>
+    <p class="subtitle">Pick what feels right to you.</p>
+
+    <!-- DESTINATION -->
+    <div class="section">
+      <label>📍 Where should we go?</label>
+      <input
+        type="text"
+        id="placeInput"
+        placeholder="Search a place…"
+        autocomplete="off"
+      />
+      <ul id="suggestions"></ul>
+    </div>
+
+    <!-- FOOD -->
+    <div class="section">
+      <label>🍽️ What should we eat?</label>
+      <div class="options" id="foodOptions">
+        <button>Italian 🍕</button>
+        <button>Sushi 🍣</button>
+        <button>Burgers 🍔</button>
+        <button>Dessert 🍰</button>
+        <button>Coffee ☕</button>
+      </div>
+    </div>
+
+    <!-- VIBE -->
+    <div class="section">
+      <label>✨ What’s the vibe?</label>
+      <div class="options" id="vibeOptions">
+        <button>Cozy & Calm 🌙</button>
+        <button>Long Talks 💬</button>
+        <button>Movie Night 🎥</button>
+        <button>Long Walk 🌌</button>
+        <button>Just Us ❤️</button>
+      </div>
+    </div>
+
+    <button id="confirmBtn" class="confirm">
+      Let me plan something special…
+    </button>
+
+  </main>
+
+  <!-- SURPRISE OVERLAY -->
+  <div id="surprise">
+    <div class="surprise-card">
+      <p>
+        No matter the place,<br />
+        the food, or the plan…
+        <br /><br />
+        My favorite part is <strong>you</strong>, Nowshin 💖
+      </p>
+      <button onclick="goGallery()">Continue ✨</button>
+    </div>
+  </div>
+
+  <script src="js/plan.js"></script>
+</body>
+</html>

@@ -77,7 +77,7 @@ yesBtn.addEventListener("click", () => {
   transition.classList.add("active");
 
   setTimeout(() => {
-    window.location.href = "gallery.html";
+    window.location.href = "plan.html";
   }, 650);
 });
 

@@ -1,0 +1,138 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #ff9a9e, #ff4d6d);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planner {
+  width: 90%;
+  max-width: 420px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(18px);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.35);
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 24px;
+}
+
+.section {
+  margin-bottom: 22px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+}
+
+#suggestions {
+  list-style: none;
+  margin-top: 6px;
+}
+
+#suggestions li {
+  padding: 8px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+#suggestions li:hover {
+  opacity: 1;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.options button {
+  flex: 1;
+  min-width: 45%;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: rgba(255,255,255,0.85);
+  color: #ff4d6d;
+  font-size: 0.85rem;
+}
+
+.options button.active {
+  background: white;
+  box-shadow: 0 0 0 2px #ff4d6d;
+}
+
+.confirm {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: white;
+  color: #ff4d6d;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* SURPRISE */
+#surprise {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.surprise-card {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(20px);
+  padding: 32px;
+  border-radius: 22px;
+  text-align: center;
+}
+
+.surprise-card p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.surprise-card button {
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: white;
+  color: #ff4d6d;
+}
